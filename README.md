@@ -1,7 +1,7 @@
 [한국어](README.md) | [English](README.en.md)
 # POI GeoKG 증분 갱신 파이프라인
 
-이 프로젝트는 PostgreSQL/PostGIS에 저장된 **2024년·2026년 V-World POI 스냅샷**을 비교하고, 그 결과를 기존 Neo4j GeoKG에 반영하는 연구용 프로토타입이다.
+이 프로젝트는 PostgreSQL/PostGIS에 저장된 **서울 서초구의 2024년·2026년 V-World POI 스냅샷**을 비교하고, 그 결과를 기존 Neo4j GeoKG에 반영하는 연구용 프로토타입이다.
 
 **이 저장소에는 코드만 공개한다.** POI 원본 데이터, Neo4j dump, 접속 정보는 포함하지 않는다. 따라서 동일한 실험 결과를 재현하려면 해당 데이터에 대한 적법한 접근 권한과 초기 2024 GeoKG가 별도로 필요하다. 이 저장소는 두 POI 스냅샷이 PostgreSQL의 mart.poi에 적재되고 2024년 기준 GeoKG가 Neo4j에 구축된 상태를 전제로 한다. 공개 코드는 이후의 변화 탐지, 증분 반영, 정합성 검증을 자동화한다.
 
@@ -14,8 +14,6 @@
 | 모듈 3: 결과 검증 | `verify_inc_poi.py` | 갱신된 그래프와 2026 스냅샷의 정합성을 검증 |
 | 통합 실행 | `run_pipeline.py` | 모듈 1→2→3을 순서대로 실행 |
 | 선택적 초기화 | `reset_to_t1.py` | 현재 로컬 Neo4j를 백업한 뒤 비공개 T1 dump로 복원 |
-
-원본 POI 파일의 수집·전처리·RDB 적재와 최초 GeoKG 생성은 이 저장소의 자동화 범위에 포함되지 않는다.
 
 ## 변화 판정 기준
 
@@ -71,7 +69,7 @@ NEO4J_JAVA_HOME=<로컬 Java 실행 환경 폴더>
 
 ## 파이프라인 실행
 
-아래 명령은 연결 상태와 사전 조건만 확인하며 데이터베이스를 변경하지 않는다.
+아래 명령은 데이터베이스를 변경하지 않는 통합 점검이다. 단, 모듈 2의 증분 데이터도 검사하므로 `mart.inc_poi`가 이미 생성되어 있어야 한다. 아직 증분 테이블이 없다면 `python create_inc_poi.py`로 원본 스냅샷의 사전 조건부터 점검한다.
 
 ```powershell
 python run_pipeline.py
