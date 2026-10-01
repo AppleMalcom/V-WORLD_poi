@@ -1,3 +1,4 @@
+[한국어](README.md) | [English](README.en.md)
 # Incremental POI GeoKG Update Pipeline
 
 A research prototype that updates an existing Neo4j GeoKG by comparing 2024 and 2026 V-World POI snapshots stored in PostgreSQL/PostGIS.
