@@ -71,13 +71,13 @@ NEO4J_JAVA_HOME=<local Java runtime directory>
 
 ## Run the pipeline
 
-Run from the project root. Without `--apply`, the command performs read-only checks. This integrated check requires an existing `mart.inc_poi` table because it also checks module 2. If the table has not been created yet, run `python create_inc_poi.py` to check the source snapshots first. If `mart.inc_poi` already exists, run this read-only integrated check from the project root:
+If mart.inc_poi already exists, run this read-only integrated check from the project root:
 
 ```powershell
 python run_pipeline.py
 ```
 
-If mart.inc_poi does not exist yet, run python create_inc_poi.py to check the source snapshots first. Module 1 creates mart.inc_poi during python run_pipeline.py --apply.
+If mart.inc_poi does not exist yet, run python create_inc_poi.py to check the source snapshots first. Module 1 creates the table during python run_pipeline.py --apply.
 
 To run the complete 2024 → 2026 update from the baseline graph:
 
