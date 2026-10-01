@@ -77,7 +77,7 @@ Run from the project root. Without `--apply`, the command performs read-only che
 python run_pipeline.py
 ```
 
-If the incremental table does not exist yet, run `python create_inc_poi.py` to check the source snapshots first. Module 1 creates `mart.inc_poi` during the actual integrated run.
+If mart.inc_poi does not exist yet, run python create_inc_poi.py to check the source snapshots first. Module 1 creates mart.inc_poi during python run_pipeline.py --apply.
 
 To run the complete 2024 → 2026 update from the baseline graph:
 
