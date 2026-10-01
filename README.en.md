@@ -5,14 +5,6 @@ A research prototype that updates an existing Neo4j GeoKG by comparing 2024 and 
 
 **This repository contains code only.** POI source data, database dumps, credentials, and connection details are not publicly distributed. Reproducing the reported results requires authorized access to equivalent snapshots and an initialized 2024 GeoKG. This repository assumes that both POI snapshots are already loaded into PostgreSQL mart.poi and that a 2024 baseline GeoKG exists in Neo4j. The published code automates change detection, incremental graph updates, and result verification.
 
-## End-to-end research workflow and repository scope
-
-POI snapshots are collected, loaded into a PostgreSQL `raw` schema, and preprocessed into `mart.poi`. This repository automates the subsequent steps: SQL-based change detection (`mart.inc_poi`), batched extraction from PostgreSQL, updates to an existing Neo4j GeoKG, and PostgreSQL–Neo4j consistency verification.
-
-Snapshot acquisition, raw-data ingestion, preprocessing, and initial GeoKG construction are prerequisites **outside this repository's implementation scope**. The integrated pipeline reads incremental rows directly from PostgreSQL; it does not require an intermediate CSV export.
-
-Development began with controlled 2024/2026 samples to test change types, followed by exception-case review and a full-snapshot automation experiment for Seocho-gu, Seoul.
-
 ## Workflow
 
 | Module | Files | Role |
