@@ -29,7 +29,7 @@ The pipeline does not download POI data, preprocess raw files, or construct the 
 
 The implementation assumes that `nf_id` is a stable, unique POI identifier. It is the join key, not a watched property.
 
-Watched properties are `poi_nm`, `poi_cl_dc`, `emd_cd`, and `geom`. Geometry is compared in EPSG:5179 using a **0.1 m tolerance**. A smaller positional difference alone does not trigger an update.
+The watched properties are poi_nm, poi_cl_dc, emd_cd, and geom. Among 56,179 POIs sharing an nf_id across snapshots, 56,079 (99.82%) had positional differences within 0.1 m. We treat these small differences as potential coordinate-conversion or storage effects and use ST_DWithin in EPSG:5179 to classify positional changes greater than 0.1 m as spatial updates. Changes to the name, category, or administrative-dong code still trigger updated regardless of positional distance.
 
 | 2024 snapshot | 2026 snapshot | Result |
 | --- | --- | --- |
@@ -78,8 +78,6 @@ NEO4J_PASSWORD=<Neo4j password>
 NEO4J_HOME=<local Neo4j DBMS directory>
 NEO4J_JAVA_HOME=<local Java runtime directory>
 ```
-
-Never commit `.env`.
 
 ## Run the pipeline
 
