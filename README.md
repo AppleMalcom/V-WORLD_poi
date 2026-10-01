@@ -69,11 +69,12 @@ NEO4J_JAVA_HOME=<로컬 Java 실행 환경 폴더>
 
 ## 파이프라인 실행
 
-아래 명령은 데이터베이스를 변경하지 않는 통합 점검이다. 단, 모듈 2의 증분 데이터도 검사하므로 `mart.inc_poi`가 이미 생성되어 있어야 한다. 아직 증분 테이블이 없다면 `python create_inc_poi.py`로 원본 스냅샷의 사전 조건부터 점검한다.
+아래 명령은 데이터베이스를 변경하지 않는 통합 점검이다. 단, 모듈 2의 증분 데이터도 검사하므로 `mart.inc_poi`가 이미 생성되어 있어야 한다. 아직 증분 테이블이 없다면 `python create_inc_poi.py`로 원본 스냅샷의 사전 조건부터 점검한다. `mart.inc_poi`가 이미 생성되어 있다면 다음 명령으로 데이터베이스를 변경하지 않는 통합 점검을 수행한다.
 
 ```powershell
 python run_pipeline.py
 ```
+아직 증분 테이블이 없다면 `python create_inc_poi.py`로 원본 스냅샷의 사전 조건부터 점검한다. 실제 통합 실행 시에는 모듈 1이 `mart.inc_poi`를 생성한다.
 
 2024 baseline에서 2026 target으로 실제 갱신하려면 다음을 실행한다.
 
