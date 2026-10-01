@@ -1,7 +1,7 @@
 [한국어](README.md) | [English](README.en.md)
 # Incremental POI GeoKG Update Pipeline
 
-A research prototype that updates an existing Neo4j GeoKG by comparing 2024 and 2026 V-World POI snapshots stored in PostgreSQL/PostGIS.
+A research prototype that updates an existing Neo4j GeoKG by comparing 2024 and 2026 V-World POI snapshots for Seocho-gu, Seoul, stored in PostgreSQL/PostGIS.
 
 **This repository contains code only.** POI source data, database dumps, credentials, and connection details are not publicly distributed. Reproducing the reported results requires authorized access to equivalent snapshots and an initialized 2024 GeoKG. This repository assumes that both POI snapshots are already loaded into PostgreSQL mart.poi and that a 2024 baseline GeoKG exists in Neo4j. The published code automates change detection, incremental graph updates, and result verification.
 
@@ -14,8 +14,6 @@ A research prototype that updates an existing Neo4j GeoKG by comparing 2024 and 
 | 3. Verification | `verify_inc_poi.py` | Compare the updated graph with the 2026 snapshot. |
 | Orchestration | `run_pipeline.py` | Run modules 1–3 in sequence. |
 | Optional reset | `reset_to_t1.py` | Back up the local Neo4j database and restore a private 2024 baseline dump. |
-
-The pipeline does not download POI data, preprocess raw files, or construct the initial GeoKG.
 
 ## Change detection
 
@@ -73,7 +71,7 @@ NEO4J_JAVA_HOME=<local Java runtime directory>
 
 ## Run the pipeline
 
-Run from the project root. Without `--apply`, the command performs checks without changing either database:
+Run from the project root. Without `--apply`, the command performs read-only checks. This integrated check requires an existing `mart.inc_poi` table because it also checks module 2. If the table has not been created yet, run `python create_inc_poi.py` to check the source snapshots first:
 
 ```powershell
 python run_pipeline.py
