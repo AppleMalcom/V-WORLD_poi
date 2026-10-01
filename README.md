@@ -1,5 +1,4 @@
----
-
+[한국어](README.md) | [English](README.en.md)
 # POI GeoKG 증분 갱신 파이프라인
 
 이 프로젝트는 PostgreSQL/PostGIS에 저장된 **2024년·2026년 V-World POI 스냅샷**을 비교하고, 그 결과를 기존 Neo4j GeoKG에 반영하는 연구용 프로토타입이다.
