@@ -256,18 +256,22 @@ def upsert_batch(tx, rows):
     return [s1.counters, s2.counters, s3.counters]
 
 
-def reset_delete_batch(tx, nf_ids):
-    """리셋: POI/Tombstone 노드를 배치로 DETACH DELETE."""
+def reset_delete_label_batch(tx, label, batch_size):
+    """리셋: 특정 라벨 노드를 LIMIT 단위로 DETACH DELETE.
+
+    :POITombstone에는 nf_id 인덱스가 없으므로 nf_id 매칭 대신
+    라벨 스캔 + LIMIT 배치로 삭제한다. 반환값은 이번 호출에서
+    삭제된 노드 수이며, 0이 되면 호출부가 반복을 멈춘다.
+    """
     result = tx.run(
-        """
-        UNWIND $nf_ids AS nf_id
-        MATCH (p {nf_id: nf_id})
-        WHERE p:POI2024 OR p:POITombstone
+        f"""
+        MATCH (p:{label})
+        WITH p LIMIT $batch_size
         DETACH DELETE p
         """,
-        nf_ids=nf_ids,
+        batch_size=batch_size,
     )
-    return result.consume().counters
+    return result.consume().counters.nodes_deleted
 
 
 def reset_upsert_batch(tx, rows):
@@ -327,19 +331,17 @@ def accumulate(acc, counters):
 # ---------------------------------------------------------------------------
 def reset_to_baseline(pg_conn, session, batch_size):
     """그래프를 깨끗한 2024 baseline으로 되돌린다(측정 제외)."""
-    existing_ids = list(
-        session.run(
-            """
-            MATCH (p)
-            WHERE p:POI2024 OR p:POITombstone
-            RETURN p.nf_id AS nf_id
-            """
-        ).value("nf_id")
-    )
-    for start in range(0, len(existing_ids), batch_size):
-        chunk = existing_ids[start:start + batch_size]
-        session.execute_write(reset_delete_batch, chunk)
+    # 1) 기존 POI/Tombstone 노드를 라벨 단위로 모두 삭제한다.
+    #    (:POITombstone에는 nf_id 인덱스가 없으므로 라벨 스캔으로 지운다)
+    for label in ("POI2024", "POITombstone"):
+        while True:
+            deleted = session.execute_write(
+                reset_delete_label_batch, label, batch_size
+            )
+            if deleted == 0:
+                break
 
+    # 2) 2024 스냅샷 전체를 다시 적재한다.
     for rows in stream_snapshot_rows(
         pg_conn, BASELINE_SNAPSHOT, batch_size
     ):
