@@ -1,57 +1,57 @@
 <mxfile host="app.diagrams.net" agent="paper-figure" version="24.0.0">
   <diagram id="framework" name="Figure1">
-    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+    <mxGraphModel dx="900" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="520" pageHeight="1000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
 
         <!-- ===== Container: PostgreSQL / PostGIS ===== -->
-        <mxCell id="pg_area" value="PostgreSQL / PostGIS" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 4;verticalAlign=top;fontSize=13;fontStyle=1;fillColor=none;strokeColor=#555555;align=center;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="40" y="80" width="440" height="340" as="geometry" />
+        <mxCell id="pg_area" value="PostgreSQL / PostGIS" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 4;verticalAlign=top;fontSize=14;fontStyle=1;fillColor=none;strokeColor=#555555;align=center;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="440" height="360" as="geometry" />
         </mxCell>
 
         <!-- 2024 snapshot -->
-        <mxCell id="snap2024" value="2024 snapshot" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="90" y="120" width="150" height="50" as="geometry" />
+        <mxCell id="snap2024" value="2024 snapshot" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="80" y="90" width="160" height="55" as="geometry" />
         </mxCell>
         <!-- 2026 snapshot -->
-        <mxCell id="snap2026" value="2026 snapshot" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="280" y="120" width="150" height="50" as="geometry" />
+        <mxCell id="snap2026" value="2026 snapshot" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="280" y="90" width="160" height="55" as="geometry" />
         </mxCell>
 
         <!-- (1) 변화 탐지 -->
-        <mxCell id="detect" value="① 변화 탐지&#10;(nf_id 비교, 0.1m 임계값)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
-          <mxGeometry x="150" y="230" width="220" height="60" as="geometry" />
+        <mxCell id="detect" value="① 변화 탐지&#10;(nf_id 비교, 0.1m 임계값)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
+          <mxGeometry x="130" y="210" width="260" height="65" as="geometry" />
         </mxCell>
 
         <!-- inc_poi -->
-        <mxCell id="incpoi" value="증분 테이블 (inc_poi)&#10;appear / disappear / updated" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="150" y="340" width="220" height="55" as="geometry" />
+        <mxCell id="incpoi" value="증분 테이블 (inc_poi)&#10;appear / disappear / updated" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="130" y="320" width="260" height="60" as="geometry" />
         </mxCell>
 
         <!-- ===== Container: Neo4j ===== -->
-        <mxCell id="neo_area" value="Neo4j" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 4;verticalAlign=top;fontSize=13;fontStyle=1;fillColor=none;strokeColor=#555555;align=center;spacingTop=6;" vertex="1" parent="1">
-          <mxGeometry x="620" y="80" width="440" height="340" as="geometry" />
+        <mxCell id="neo_area" value="Neo4j" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;dashPattern=6 4;verticalAlign=top;fontSize=14;fontStyle=1;fillColor=none;strokeColor=#555555;align=center;spacingTop=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="440" height="470" as="geometry" />
         </mxCell>
 
         <!-- 기존 GeoKG -->
-        <mxCell id="kg2024" value="기존 GeoKG (2024)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="730" y="115" width="220" height="45" as="geometry" />
+        <mxCell id="kg2024" value="기존 GeoKG (2024)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="130" y="540" width="260" height="50" as="geometry" />
         </mxCell>
 
         <!-- (2) 그래프 증분 반영 -->
-        <mxCell id="apply" value="② 그래프 증분 반영&#10;appear·updated: MERGE&#10;disappear: 라벨 전환" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
-          <mxGeometry x="730" y="195" width="220" height="70" as="geometry" />
+        <mxCell id="apply" value="② 그래프 증분 반영&#10;appear·updated: MERGE&#10;disappear: 라벨 전환" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
+          <mxGeometry x="130" y="635" width="260" height="80" as="geometry" />
         </mxCell>
 
         <!-- 갱신된 GeoKG -->
-        <mxCell id="kg2026" value="갱신된 GeoKG (2026)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
-          <mxGeometry x="730" y="300" width="220" height="45" as="geometry" />
+        <mxCell id="kg2026" value="갱신된 GeoKG (2026)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;strokeColor=#000000;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="130" y="760" width="260" height="50" as="geometry" />
         </mxCell>
 
         <!-- (3) 정합성 검증 -->
-        <mxCell id="verify" value="③ 정합성 검증&#10;(2026 snapshot과 일치 확인)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
-          <mxGeometry x="730" y="375" width="220" height="30" as="geometry" />
+        <mxCell id="verify" value="③ 정합성 검증&#10;(2026 snapshot과 일치 확인)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=13;fontStyle=1;strokeColor=#000000;fillColor=#F2F2F2;" vertex="1" parent="1">
+          <mxGeometry x="130" y="855" width="260" height="65" as="geometry" />
         </mxCell>
 
         <!-- ===== Arrows (PG side) ===== -->
@@ -65,9 +65,14 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
 
-        <!-- ===== Cross-area arrow: inc_poi -> apply ===== -->
-        <mxCell id="e_cross" value="변화 객체만 전달" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#000000;fontSize=11;fontStyle=1;" edge="1" parent="1" source="incpoi" target="apply">
-          <mxGeometry relative="1" as="geometry" />
+        <!-- ===== Cross-area arrow: inc_poi -> kg/apply ===== -->
+        <mxCell id="e_cross" value="변화 객체만 전달" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeWidth=2;strokeColor=#000000;fontSize=12;fontStyle=1;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="incpoi" target="apply">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="470" y="350" />
+              <mxPoint x="470" y="675" />
+            </Array>
+          </mxGeometry>
         </mxCell>
 
         <!-- ===== Arrows (Neo4j side) ===== -->
